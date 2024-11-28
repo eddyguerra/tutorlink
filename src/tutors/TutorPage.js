@@ -6,6 +6,11 @@ function TutorPage({ tutor, goToHome }) {
     const [tutorReviews, setTutorReviews] = useState(reviews.filter((review) => review.tutorId === tutor.id));
     const [newReview, setNewReview] = useState({ userName: "", review: "" });
 
+    const [selectedDate, setSelectedDate] = useState(""); // For booking date
+    const [selectedTime, setSelectedTime] = useState(""); // For booking time
+    const [lessonsPerWeek, setLessonsPerWeek] = useState(1); // Default weekly lessons
+    const [isBooked, setIsBooked] = useState(false); // Booking confirmation
+
     const handleReviewSubmit = () => {
         if (!newReview.userName || !newReview.review) {
             alert("Please fill out both fields before submitting.");
@@ -18,12 +23,21 @@ function TutorPage({ tutor, goToHome }) {
             review: newReview.review,
         };
 
-        // Update reviews locally
         setTutorReviews([...tutorReviews, updatedReview]);
-
-        // Clear the form
         setNewReview({ userName: "", review: "" });
     };
+
+    const handleBooking = () => {
+        if (!selectedDate || !selectedTime) {
+            alert("Please select both a date and time.");
+            return;
+        }
+        setIsBooked(true);
+    };
+
+    const totalWeeklyCost = tutor.price * lessonsPerWeek;
+    const totalMonthlyCost = totalWeeklyCost * 4; // Approximate weeks per month
+    const totalYearlyCost = totalWeeklyCost * 52;
 
     return (
         <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
@@ -46,6 +60,90 @@ function TutorPage({ tutor, goToHome }) {
             </h2>
             <p style={{ textAlign: "center", fontWeight: "bold" }}>🌍 Country: {tutor.country}</p>
             <p style={{ marginTop: "10px", fontSize: "16px", lineHeight: "1.5" }}>📝 {tutor.summary}</p>
+
+            <h3>Book a Lesson</h3>
+            <div style={{ marginTop: "20px" }}>
+                <label>
+                    Select Date:
+                    <input
+                        type="date"
+                        value={selectedDate}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        style={{
+                            display: "block",
+                            padding: "8px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            width: "100%",
+                            borderRadius: "5px",
+                            border: "1px solid #ccc",
+                        }}
+                    />
+                </label>
+                <label>
+                    Select Time:
+                    <input
+                        type="time"
+                        value={selectedTime}
+                        onChange={(e) => setSelectedTime(e.target.value)}
+                        style={{
+                            display: "block",
+                            padding: "8px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            width: "100%",
+                            borderRadius: "5px",
+                            border: "1px solid #ccc",
+                        }}
+                    />
+                </label>
+                <label>
+                    Lessons Per Week:
+                    <input
+                        type="number"
+                        min="0"
+                        max="5"
+                        value={lessonsPerWeek}
+                        onChange={(e) => setLessonsPerWeek(Number(e.target.value))}
+                        style={{
+                            display: "block",
+                            padding: "8px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            width: "100%",
+                            borderRadius: "5px",
+                            border: "1px solid #ccc",
+                        }}
+                    />
+                </label>
+                <button
+                    onClick={handleBooking}
+                    style={{
+                        padding: "10px 20px",
+                        backgroundColor: "#28a745",
+                        color: "#FFF",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        marginTop: "10px",
+                    }}
+                >
+                    Book Free Trial
+                </button>
+            </div>
+
+            {isBooked && (
+                <div style={{ marginTop: "20px" }}>
+                    <h4>Booking Confirmed!</h4>
+                    <p>
+                        You have a lesson scheduled on <strong>{selectedDate}</strong> at{" "}
+                        <strong>{selectedTime}</strong>.
+                    </p>
+                    <p>Total Weekly Cost: ${totalWeeklyCost}</p>
+                    <p>Total Monthly Cost: ${totalMonthlyCost}</p>
+                    <p>Total Yearly Cost: ${totalYearlyCost}</p>
+                </div>
+            )}
 
             <h3>Reviews</h3>
             <div>
