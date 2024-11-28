@@ -10,6 +10,21 @@ const reviews = [
         review: "John helped me pass my English exams with flying colors!",
     },
     {
+        tutorId: 0,
+        userName: "Sophia",
+        review: "John's approach to teaching English is both fun and effective.",
+    },
+    {
+        tutorId: 0,
+        userName: "Ethan",
+        review: "John is patient and ensures you understand every concept.",
+    },
+    {
+        tutorId: 0,
+        userName: "Grace",
+        review: "Highly recommend John for anyone looking to improve their English.",
+    },
+    {
         tutorId: 1, // Maria Gonzalez
         userName: "Bob",
         review: "Maria helped me improve my Spanish significantly in just a few weeks!",
@@ -18,6 +33,21 @@ const reviews = [
         tutorId: 1,
         userName: "Lucy",
         review: "Maria's lessons are very engaging and fun.",
+    },
+    {
+        tutorId: 1,
+        userName: "Zara",
+        review: "I loved learning Spanish with Maria. She makes it so easy.",
+    },
+    {
+        tutorId: 1,
+        userName: "Ryan",
+        review: "Maria's interactive lessons are the best!",
+    },
+    {
+        tutorId: 1,
+        userName: "Ella",
+        review: "Maria explains difficult grammar concepts in a simple way.",
     },
     {
         tutorId: 2, // Ahmed Khan
@@ -30,6 +60,21 @@ const reviews = [
         review: "Ahmed's teaching style is exactly what I needed to improve my Urdu.",
     },
     {
+        tutorId: 2,
+        userName: "Daniel",
+        review: "Ahmed is professional, friendly, and incredibly helpful.",
+    },
+    {
+        tutorId: 2,
+        userName: "Ivy",
+        review: "I have learned so much Urdu in just a few sessions with Ahmed.",
+    },
+    {
+        tutorId: 2,
+        userName: "Frank",
+        review: "Ahmed's lessons are well-prepared and always interesting.",
+    },
+    {
         tutorId: 3, // Sofia Ivanova
         userName: "Diana",
         review: "Sofia's teaching style is amazing. I feel much more confident speaking Russian now.",
@@ -40,6 +85,21 @@ const reviews = [
         review: "Sofia's lessons are structured and tailored to my needs.",
     },
     {
+        tutorId: 3,
+        userName: "Anna",
+        review: "Learning Russian with Sofia has been a delightful experience.",
+    },
+    {
+        tutorId: 3,
+        userName: "Harry",
+        review: "Sofia explains grammar so clearly. She's a fantastic tutor.",
+    },
+    {
+        tutorId: 3,
+        userName: "Grace",
+        review: "Sofia is very supportive and always encourages me to practice.",
+    },
+    {
         tutorId: 4, // Chen Li
         userName: "Ella",
         review: "Chen is fantastic! His lessons are interactive and fun.",
@@ -48,6 +108,21 @@ const reviews = [
         tutorId: 4,
         userName: "Ryan",
         review: "Chen is very knowledgeable and makes Mandarin easy to learn.",
+    },
+    {
+        tutorId: 4,
+        userName: "Zayn",
+        review: "Chen's teaching is both practical and engaging.",
+    },
+    {
+        tutorId: 4,
+        userName: "Sophia",
+        review: "Chen's Mandarin lessons have helped me improve rapidly.",
+    },
+    {
+        tutorId: 4,
+        userName: "Jack",
+        review: "I love the way Chen incorporates cultural aspects into his lessons.",
     },
     {
         tutorId: 5, // Emily Brown
