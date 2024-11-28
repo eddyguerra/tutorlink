@@ -3,7 +3,9 @@ import ReviewCard from "./ReviewCard";
 import reviews from "./Reviews";
 
 function TutorPage({ tutor, goToHome, goToChatroom }) {
-    const [tutorReviews, setTutorReviews] = useState(reviews.filter((review) => review.tutorId === tutor.id));
+    const [tutorReviews, setTutorReviews] = useState(
+        reviews.filter((review) => review.tutorId === tutor.id)
+    );
     const [newReview, setNewReview] = useState({ userName: "", review: "" });
 
     const [selectedDate, setSelectedDate] = useState(""); // For booking date
@@ -46,8 +48,8 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
     const totalYearlyCost = totalWeeklyCost * 52;
 
     return (
-        <div style={{padding: "20px", maxWidth: "600px", margin: "auto"}}>
-            <button onClick={goToHome} style={{marginBottom: "10px"}}>
+        <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+            <button onClick={goToHome} style={{ marginBottom: "10px" }}>
                 Back to Home
             </button>
             <img
@@ -61,15 +63,15 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
                     margin: "0 auto",
                 }}
             />
-            <h2 style={{textAlign: "center"}}>
+            <h2 style={{ textAlign: "center" }}>
                 {tutor.firstName} {tutor.lastName}
             </h2>
-            <p style={{textAlign: "center", fontWeight: "bold"}}>🌍 Country: {tutor.country}</p>
-            <p style={{textAlign: "center", fontWeight: "bold"}}>⭐ Rating: {tutor.rating}</p>
-            <p style={{marginTop: "10px", fontSize: "16px", lineHeight: "1.5"}}>📝 {tutor.summary}</p>
+            <p style={{ textAlign: "center", fontWeight: "bold" }}>🌍 Country: {tutor.country}</p>
+            <p style={{ textAlign: "center", fontWeight: "bold" }}>⭐ Rating: {tutor.rating}</p>
+            <p style={{ marginTop: "10px", fontSize: "16px", lineHeight: "1.5" }}>📝 {tutor.summary}</p>
 
             <h3>Book a Lesson</h3>
-            <div style={{marginTop: "20px"}}>
+            <div style={{ marginTop: "20px" }}>
                 <label>
                     Select Date:
                     <input
@@ -140,7 +142,7 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
             </div>
 
             {isBooked && (
-                <div style={{marginTop: "20px"}}>
+                <div style={{ marginTop: "20px" }}>
                     <h4>Booking Confirmed!</h4>
                     <p>
                         You have a lesson scheduled on <strong>{selectedDate}</strong> at{" "}
@@ -166,6 +168,25 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
                 </div>
             )}
 
+            {showPopup && (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: "white",
+                        padding: "20px",
+                        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                        borderRadius: "8px",
+                        zIndex: 1000,
+                        textAlign: "center",
+                    }}
+                >
+                    <h3>Thank you for your payment!</h3>
+                </div>
+            )}
+
             <button
                 onClick={goToChatroom}
                 style={{
@@ -184,19 +205,19 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
             <h3>Reviews</h3>
             <div>
                 {tutorReviews.length > 0 ? (
-                    tutorReviews.map((review, index) => <ReviewCard key={index} review={review}/>)
+                    tutorReviews.map((review, index) => <ReviewCard key={index} review={review} />)
                 ) : (
-                    <p style={{fontStyle: "italic"}}>No reviews yet. Be the first to leave one!</p>
+                    <p style={{ fontStyle: "italic" }}>No reviews yet. Be the first to leave one!</p>
                 )}
             </div>
 
             <h3>Add a Review</h3>
-            <div style={{marginTop: "20px"}}>
+            <div style={{ marginTop: "20px" }}>
                 <input
                     type="text"
                     placeholder="Your Name"
                     value={newReview.userName}
-                    onChange={(e) => setNewReview({...newReview, userName: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, userName: e.target.value })}
                     style={{
                         padding: "8px",
                         marginBottom: "10px",
@@ -208,7 +229,7 @@ function TutorPage({ tutor, goToHome, goToChatroom }) {
                 <textarea
                     placeholder="Your Review"
                     value={newReview.review}
-                    onChange={(e) => setNewReview({...newReview, review: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                     style={{
                         padding: "8px",
                         marginBottom: "10px",

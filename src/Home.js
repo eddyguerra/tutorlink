@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import tutors from "./tutors/Tutors";
 import TutorCard from "./tutors/TutorCard";
 
-function Home({ user, goToTutorPage }) {
+function Home({ user, goToTutorPage, goToTutorLogin }) {
     const [language, setLanguage] = useState("");
     const [country, setCountry] = useState("");
     const [priceRange, setPriceRange] = useState([0, 50]);
@@ -34,6 +34,22 @@ function Home({ user, goToTutorPage }) {
 
     return (
         <div>
+            {/* Log in as Tutor Button */}
+            <button
+                onClick={goToTutorLogin}
+                style={{
+                    marginBottom: "20px",
+                    padding: "10px 20px",
+                    backgroundColor: "#007BFF",
+                    color: "#FFF",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                }}
+            >
+                Log in as Tutor
+            </button>
+
             <h1>Welcome, {user.fullName || "User"}!</h1>
             <p>You are logged in with email: {user.email}</p>
             <h2>Search for Tutors</h2>
