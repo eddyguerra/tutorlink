@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import tutors from "./tutors/Tutors";
 import TutorCard from "./tutors/TutorCard";
 
-function Home({ user }) {
+function Home({ user, goToTutorPage }) {
     const [language, setLanguage] = useState("");
     const [country, setCountry] = useState("");
     const [priceRange, setPriceRange] = useState([0, 50]);
@@ -90,7 +90,8 @@ function Home({ user }) {
             <h2>Available Tutors</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
                 {filteredTutors.map((tutor, index) => (
-                    <TutorCard key={index} tutor={tutor} />
+                    <TutorCard key={index} tutor={tutor} onClick={() => goToTutorPage(tutor)}/>
+
                 ))}
             </div>
         </div>
