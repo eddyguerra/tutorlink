@@ -7,6 +7,7 @@ function Home({ user, goToTutorPage }) {
     const [country, setCountry] = useState("");
     const [priceRange, setPriceRange] = useState([0, 50]);
     const [sortOption, setSortOption] = useState("");
+    const [searchQuery, setSearchQuery] = useState(""); // State for the search bar input
 
     // Get unique languages and countries for dropdown menus
     const languages = [...new Set(tutors.map((tutor) => tutor.language))];
@@ -19,7 +20,10 @@ function Home({ user, goToTutorPage }) {
                 (!language || tutor.language === language) &&
                 (!country || tutor.country === country) &&
                 tutor.price >= priceRange[0] &&
-                tutor.price <= priceRange[1]
+                tutor.price <= priceRange[1] &&
+                (!searchQuery || // Filter by search query
+                    tutor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    tutor.lastName.toLowerCase().includes(searchQuery.toLowerCase()))
         )
         .sort((a, b) => {
             if (sortOption === "bestReviews") return b.rating - a.rating;
@@ -36,8 +40,26 @@ function Home({ user, goToTutorPage }) {
 
             {/* Search Filters */}
             <div style={{ marginBottom: "20px" }}>
-                {/* Language Dropdown */}
+                {/* Search Bar */}
                 <label>
+                    Search by Name:
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Enter first or last name"
+                        style={{
+                            marginLeft: "10px",
+                            padding: "5px",
+                            borderRadius: "5px",
+                            border: "1px solid #ccc",
+                            width: "200px",
+                        }}
+                    />
+                </label>
+
+                {/* Language Dropdown */}
+                <label style={{ marginLeft: "20px" }}>
                     Language:
                     <select value={language} onChange={(e) => setLanguage(e.target.value)}>
                         <option value="">All Languages</option>
@@ -90,8 +112,7 @@ function Home({ user, goToTutorPage }) {
             <h2>Available Tutors</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
                 {filteredTutors.map((tutor, index) => (
-                    <TutorCard key={index} tutor={tutor} onClick={() => goToTutorPage(tutor)}/>
-
+                    <TutorCard key={index} tutor={tutor} onClick={() => goToTutorPage(tutor)} />
                 ))}
             </div>
         </div>
