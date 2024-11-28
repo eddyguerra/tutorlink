@@ -1,12 +1,16 @@
 import React from "react";
+import ReviewCard from "./ReviewCard";
+import reviews from "./Reviews";
 
-function TutorPage({ tutor }) {
-    if (!tutor) {
-        return <p>No tutor selected.</p>;
-    }
+function TutorPage({ tutor, goToHome }) {
+    // Filter reviews for the current tutor
+    const tutorReviews = reviews.filter((review) => review.tutorId === tutor.id);
 
     return (
-        <div style={{ padding: "20px", maxWidth: "600px", margin: "auto", border: "1px solid #ccc", borderRadius: "8px" }}>
+        <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+            <button onClick={goToHome} style={{ marginBottom: "10px" }}>
+                Back to Home
+            </button>
             <img
                 src={tutor.avatar}
                 alt={`${tutor.firstName} ${tutor.lastName}`}
@@ -15,7 +19,7 @@ function TutorPage({ tutor }) {
                     height: "150px",
                     borderRadius: "50%",
                     display: "block",
-                    margin: "0 auto 20px",
+                    margin: "0 auto",
                 }}
             />
             <h2 style={{ textAlign: "center" }}>
@@ -23,8 +27,14 @@ function TutorPage({ tutor }) {
             </h2>
             <p style={{ textAlign: "center", fontWeight: "bold" }}>🌍 Country: {tutor.country}</p>
             <p style={{ marginTop: "10px", fontSize: "16px", lineHeight: "1.5" }}>📝 {tutor.summary}</p>
-            <h3 style={{ marginTop: "20px" }}>Reviews</h3>
-            <p style={{ fontStyle: "italic" }}>No reviews yet. Be the first to leave one!</p>
+            <h3>Reviews</h3>
+            <div>
+                {tutorReviews.length > 0 ? (
+                    tutorReviews.map((review, index) => <ReviewCard key={index} review={review} />)
+                ) : (
+                    <p style={{ fontStyle: "italic" }}>No reviews yet. Be the first to leave one!</p>
+                )}
+            </div>
         </div>
     );
 }
