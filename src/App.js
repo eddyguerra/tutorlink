@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import AuthForm from "./AuthForm";
+import Home from "./Home";
+import tutors from "./tutors/Tutors";
+import tutorCard from "./tutors/TutorCard";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [user, setUser] = useState(null);
+
+    const handleAuth = (userData) => {
+        setUser(userData);
+    };
+
+    return (
+        <div>
+            {user ? (
+                <Home user={user} />
+            ) : (
+                <AuthForm onAuth={handleAuth} />
+            )}
+        </div>
+    );
 }
 
 export default App;
